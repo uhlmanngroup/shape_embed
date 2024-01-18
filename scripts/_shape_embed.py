@@ -45,6 +45,11 @@ import matplotlib.pyplot as plt
 
 logger = logging.getLogger(__name__)
 
+def hashing_fn(args):
+    serialized_args = pickle.dumps(vars(args))
+    hash_object = hashlib.sha256(serialized_args)
+    hashed_string = base64.urlsafe_b64encode(hash_object.digest()).decode()
+    return hashed_string
 
 def scoring_df(X, y):
     # Split the data into training and test sets
